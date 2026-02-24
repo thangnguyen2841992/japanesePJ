@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/nihongo")
@@ -28,8 +29,9 @@ public class SentenceRestController {
     }
 
     @PostMapping("/createSentence")
-    public ResponseEntity<?> createSentence(SentenceForm sentenceForm) {
-        return new ResponseEntity<>("sentence", HttpStatus.CREATED);
+    public ResponseEntity<?> createSentence(MultipartFile file) {
+        String test = sentenceService.testSentence(file);
+        return new ResponseEntity<>(test, HttpStatus.CREATED);
     }
 
     @PostMapping("/createLesson")

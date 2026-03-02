@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.concurrent.*;
 
 @Service
@@ -57,13 +58,14 @@ public class SentenceServiceImpl implements ISentenceService{
     }
 
     @Override
-    public String testSentence(MultipartFile file) {
-        // Đọc ảnh; giữ thao tác I/O tối thiểu
+    public String testSentence(String imageUrl) {
+        // Đọc ảnh từ URL
         BufferedImage img;
-        try (InputStream is = file.getInputStream()) {
-            img = ImageIO.read(is);
+        try {
+            URL url = new URL(imageUrl);
+            img = ImageIO.read(url);
             if (img == null) {
-                throw new IOException("Không thể đọc ảnh từ file upload");
+                throw new IOException("Không thể đọc ảnh từ URL");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

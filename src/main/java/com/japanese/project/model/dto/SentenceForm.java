@@ -11,6 +11,5 @@ import lombok.Setter;
 @Setter
 public class SentenceForm {
     private String lessonName;
-
-
+    private String imageUrl;
 }
